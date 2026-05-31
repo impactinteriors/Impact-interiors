@@ -313,6 +313,7 @@
 
         .services-grid {
             display: flex;
+            flex-wrap: wrap;
             gap: 30px;
         }
 
@@ -322,6 +323,7 @@
             padding: 50px 30px;
             text-align: center;
             flex: 1;
+            min-width: 250px;
             transition: 0.4s ease;
             position: relative;
         }
@@ -383,6 +385,7 @@
         .portfolio-grid {
             display: flex;
             gap: 25px;
+            margin-bottom: 50px;
         }
 
         .portfolio-item {
@@ -440,10 +443,172 @@
             opacity: 1;
         }
 
+        /* Before & After Slider Element */
+        .slider-title {
+            font-family: 'Cinzel', serif;
+            text-align: center;
+            font-size: 22px;
+            color: var(--gold-solid);
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .comparison-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            height: 450px;
+            border: 2px solid var(--gold-solid);
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+        }
+
+        .comparison-container .image-before, 
+        .comparison-container .image-after {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .comparison-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .comparison-container .image-before {
+            z-index: 1;
+        }
+
+        .comparison-container .image-after {
+            z-index: 2;
+            width: 50%; /* Initial split width */
+            border-right: 3px solid var(--gold-solid);
+        }
+
+        .comparison-slider-input {
+            position: absolute;
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 3;
+            outline: none;
+            margin: 0;
+            cursor: ew-resize;
+            top: 0;
+            left: 0;
+        }
+
+        .comparison-slider-input::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 40px;
+            height: 40px;
+            background: var(--gold-solid);
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            cursor: ew-resize;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .slider-label {
+            position: absolute;
+            bottom: 20px;
+            background: rgba(10,10,10,0.8);
+            padding: 5px 15px;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: 1px solid var(--border-gold);
+            z-index: 2;
+        }
+
+        .label-before { right: 20px; }
+        .label-after { left: 20px; z-index: 4; }
+
+        /* Process Section Styles */
+        .process {
+            background-color: var(--bg-pure-black);
+            border-top: 1px solid rgba(212, 163, 66, 0.1);
+        }
+
+        .process-timeline {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 50px;
+            gap: 20px;
+        }
+
+        .process-timeline::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold-solid), transparent);
+            z-index: 1;
+        }
+
+        .process-step {
+            text-align: center;
+            flex: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            border: 1px solid var(--gold-solid);
+            background: var(--bg-card);
+            color: var(--gold-light);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Cinzel', serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 auto 25px auto;
+            transition: 0.4s;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+        }
+
+        .process-step:hover .step-number {
+            background: var(--gold-gradient);
+            color: var(--bg-pure-black);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(212, 163, 66, 0.3);
+        }
+
+        .process-step h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 18px;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .process-step p {
+            color: var(--text-gray);
+            font-size: 13px;
+            line-height: 1.6;
+            padding: 0 10px;
+        }
+
         /* Contact Section */
         .contact {
             background-color: var(--bg-pure-black);
             position: relative;
+            border-top: 1px solid rgba(212, 163, 66, 0.1);
         }
 
         .contact-box {
@@ -536,12 +701,14 @@
         /* Responsive Design Rules */
         @media (max-width: 992px) {
             nav { display: none; } /* Simplicity for template view */
-            .services-grid, .portfolio-grid, .about {
+            .services-grid, .portfolio-grid, .about, .process-timeline {
                 flex-direction: column;
                 gap: 40px;
             }
+            .process-timeline::before { display: none; }
             .emblem-box h2 { font-size: 38px; }
             .hero h1 { font-size: 26px; }
+            .comparison-container { height: 300px; }
         }
     </style>
 </head>
@@ -557,6 +724,7 @@
             <a href="#about">About</a>
             <a href="#services">Services</a>
             <a href="#portfolio">Portfolio</a>
+            <a href="#process">Process</a>
             <a href="#contact" class="btn-nav">Consultation</a>
         </nav>
     </header>
@@ -586,7 +754,7 @@
                 "Hum aapke khwabon ko haqeeqat mein badalte hain, har kone ko ek royal touch dekar."
             </div>
             <p>Impact Interiors ek premier luxury interior design firm hai jo high-end residential aur commercial execution ke liye jaani jaati hai. Aapke logo ki tarah hi, humari design philosophy mein 'Gold Standard' Quality aur Modern Structure sabse upar aata hai.</p>
-            <p>Space optimization ho, elite customized furniture selection ho, ya fir customized false-ceiling lighting arrangement, humari expert team har ek detail par poori bariki se kaam karti hai.</p>
+            <p>Space optimization ho, elite customized furniture selection ho, ya fir customized false-ceiling lighting arrangement, humari expert team har ek detail par poori bariki se kaam kaiti hai.</p>
         </div>
         <div class="about-img">
             <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=600&q=80" alt="Luxury Living Room Design">
@@ -611,9 +779,14 @@
                 <p>High-end corporate offices, upscale cafes aur elite boutique showrooms ke liye functional premium layouts.</p>
             </div>
             <div class="service-card">
-                <div class="service-icon"><i class="fa-solid fa-lightbulb"></i></div>
-                <h4>Lighting & Decor</h4>
-                <p>Architectural interior lighting plan aur unique artifacts placement jo space ko dramatic gold aesthetic de.</p>
+                <div class="service-icon"><i class="fa-solid fa-key"></i></div>
+                <h4>Turnkey Execution</h4>
+                <p>Design planning se lekar raw material purchase aur final finishing tak, sab kuch humari dekh-rekh mein complete handover.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fa-solid fa-cubes"></i></div>
+                <h4>3D Space Visualization</h4>
+                <p>Kaam shuru hone se pehle hi aapne space ko ultra-realistic 3D walkthrough aur layouts ke jariye live dekhein.</p>
             </div>
         </div>
     </section>
@@ -647,14 +820,55 @@
                 </div>
             </div>
         </div>
+
+        <h3 class="slider-title">Before & After Transformation</h3>
+        <div class="comparison-container">
+            <div class="image-before">
+                <span class="slider-label label-before">Before</span>
+                <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80" alt="Renovation Raw Space">
+            </div>
+            <div id="afterImage" class="image-after">
+                <span class="slider-label label-after">After</span>
+                <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80" alt="Luxury Finished Space">
+            </div>
+            <input type="range" min="0" max="100" value="50" class="comparison-slider-input" oninput="moveSlider(this.value)">
+        </div>
+    </section>
+
+    <section id="process" class="process">
+        <div class="section-header">
+            <h2>Our Architectural Process</h2>
+            <div class="deco-line"><i class="fa-solid fa-compass-drafting"></i></div>
+        </div>
+        <div class="process-timeline">
+            <div class="process-step">
+                <div class="step-number">01</div>
+                <h4>Consultation</h4>
+                <p>Hum aapke requirements, taste aur detailed space map ko gehrai se samajhte hain.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">02</div>
+                <h4>3D Concept</h4>
+                <p>Aapke budget ke mutabik hum custom material sheets aur realistic 3D designs ready karte hain.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">03</div>
+                <h4>Execution</h4>
+                <p>Humare skilled craftsmen aur site supervisors premium precision ke saath kaam live shuru karte hain.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">04</div>
+                <h4>Handover</h4>
+                <p>On-time commitment ke sath aapki luxury space ka final deep clean aur royal welcome handover.</p>
+            </div>
+        </div>
     </section>
 
     <section id="contact" class="contact">
         <div class="contact-box">
-            <h3>Let's Expand Your Dreams</h3>
-            <p>Apne corporate space ya dream home ke liye top-tier consultancy book karein.</p>
-            
-            <form action="#" method="POST">
+            <h3>Book Premium Consultation</h3>
+            <p>Apni space ko elite makeover dene ke liye niche diye gaye form ko bharein. Humari design team aapse jaldi hi sampark karegi.</p>
+            <form>
                 <div class="form-group">
                     <input type="text" placeholder="Your Full Name" required>
                 </div>
@@ -662,16 +876,10 @@
                     <input type="email" placeholder="Your Email Address" required>
                 </div>
                 <div class="form-group">
-                    <input type="tel" placeholder="Phone Number" required>
+                    <input type="tel" placeholder="Your Phone Number" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" placeholder="Area Pincode (6 Digits)" pattern="[0-9]{6}" maxlength="6" required>
-                </div>
-                <div class="form-group">
-                    <textarea placeholder="Briefly describe your dream project (e.g., 3 BHK Villa, Luxury Office)..." rows="5" required></textarea>
-                </div>
-                <div class="form-group" style="display: none;">
-                     <input type="text" name="_honey" style="display: none;">
+                    <textarea rows="5" placeholder="Tell us about your space (e.g., 3BHK Home, Luxury Cafe, Office)" required></textarea>
                 </div>
                 <button type="submit" class="btn-submit">Submit Request</button>
             </form>
@@ -680,8 +888,14 @@
 
     <footer>
         <div class="footer-logo">IMPACT INTERIORS</div>
-        <p>&copy; 2026 Impact Interiors. Expanding Your Dreams. All Rights Reserved.</p>
+        <p>Designed by Krishna Panchal | &copy; 2026 Impact Interiors. All Rights Reserved. Crafted with Luxury Standards.</p>
     </footer>
 
+    <script>
+        // Before/After Image Slider Control Logic
+        function moveSlider(value) {
+            document.getElementById('afterImage').style.width = value + '%';
+        }
+    </script>
 </body>
 </html>
