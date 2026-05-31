@@ -22,11 +22,10 @@
             overflow-x: hidden;
         }
 
-        /* Logo Theme Colors Integration */
         :root {
-            --primary: #d4a342;      /* Logo wala Deep Golden Accent */
-            --dark-bg: #181818;      /* Logo ka Dark Charcoal/Black Background */
-            --light-gray: #f9f9f9;   /* Soft clean background */
+            --primary: #d4a342;
+            --dark-bg: #181818;
+            --light-gray: #f9f9f9;
             --border-color: #e5e5e5;
             --gold-gradient: linear-gradient(135deg, #f3e0b5 0%, #d4a342 50%, #b38526 100%);
             --gold-solid: #d4a342;
@@ -39,7 +38,7 @@
             --border-gold: rgba(212, 163, 66, 0.3);
         }
 
-        /* Common Decorative Border Style matching the logo lines */
+        /* Decorative Border Style */
         .deco-line {
             display: flex;
             align-items: center;
@@ -100,33 +99,150 @@
             display: block;
         }
 
-        nav a {
-            text-decoration: none;
-            color: var(--text-light);
-            margin-left: 30px;
-            font-size: 14px;
-            font-weight: 400;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+        /* Hamburger Menu Trigger Button */
+        .menu-toggle-btn {
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 24px;
+            cursor: pointer;
             transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-
-        nav a:hover, nav a.active {
+        
+        .menu-toggle-btn:hover {
             color: var(--gold-solid);
         }
 
-        .btn-nav {
-            border: 1px solid var(--gold-solid);
-            padding: 10px 24px;
-            border-radius: 0px;
-            background: transparent;
-            transition: 0.4s;
+        /* SLIDING SIDEBAR NAVIGATION (As per Image 1000085286.png) */
+        .sidebar-nav {
+            position: fixed;
+            top: 0;
+            right: -350px; /* Initially hidden on the right */
+            width: 350px;
+            height: 100vh;
+            background: #151518;
+            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 30px;
+            transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+            overflow-y: auto;
+            border-left: 1px solid rgba(212, 163, 66, 0.15);
         }
 
-        .btn-nav:hover {
-            background: var(--gold-gradient);
-            color: var(--bg-pure-black) !important;
-            box-shadow: 0 0 15px rgba(212, 163, 66, 0.4);
+        .sidebar-nav.open {
+            right: 0; /* Slide in */
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 20px;
+        }
+
+        .sidebar-close-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-light);
+            font-size: 24px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .sidebar-close-btn:hover {
+            color: var(--gold-solid);
+        }
+
+        /* Sidebar Menu Items */
+        .menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .menu-item {
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 16px;
+            font-weight: 500;
+            padding: 15px 10px;
+            letter-spacing: 1.5px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .menu-item:hover {
+            color: var(--gold-solid);
+            background: rgba(212, 163, 66, 0.02);
+            padding-left: 15px;
+        }
+
+        /* Nested Service List Accordion */
+        .services-accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background: rgba(0, 0, 0, 0.15);
+            padding-left: 15px;
+        }
+
+        .services-accordion-content.show {
+            max-height: 500px; /* Expands to show nested list */
+        }
+
+        .sub-service-link {
+            display: block;
+            text-decoration: none;
+            color: var(--text-gray);
+            font-size: 13px;
+            padding: 10px 10px;
+            letter-spacing: 1px;
+            border-left: 1px solid rgba(212, 163, 66, 0.3);
+            transition: 0.3s;
+        }
+
+        .sub-service-link:hover {
+            color: var(--gold-solid);
+            padding-left: 15px;
+            background: rgba(212, 163, 66, 0.04);
+        }
+
+        .dropdown-chevron {
+            transition: transform 0.3s;
+            font-size: 14px;
+        }
+
+        .menu-item.active-drop .dropdown-chevron {
+            transform: rotate(180deg);
+            color: var(--gold-solid);
+        }
+
+        /* Dark Overlay when Menu is Open */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(3px);
+            z-index: 1500;
+            display: none;
+        }
+
+        .sidebar-overlay.show {
+            display: block;
         }
 
         /* Hero Section */
@@ -143,7 +259,6 @@
             border-bottom: 1px solid var(--border-gold);
         }
 
-        /* Logo Emblem Simulation in Hero */
         .emblem-box {
             border: 2px solid var(--gold-solid);
             padding: 20px 40px;
@@ -180,10 +295,6 @@
             color: var(--text-light);
             margin-bottom: 15px;
             max-width: 800px;
-        }
-
-        .hero h1 span {
-            color: var(--gold-solid);
         }
 
         .tagline-gold {
@@ -246,6 +357,7 @@
         .section-header {
             text-align: center;
             margin-bottom: 60px;
+            scroll-margin-top: 100px;
         }
 
         .section-header h2 {
@@ -258,13 +370,14 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* About Section */
+        /* About & Founder Section */
         .about {
             background-color: var(--bg-dark);
             display: flex;
             align-items: center;
             gap: 60px;
             border-bottom: 1px solid rgba(212, 163, 66, 0.1);
+            scroll-margin-top: 80px;
         }
 
         .about-text {
@@ -275,8 +388,17 @@
             font-family: 'Cinzel', serif;
             font-size: 22px;
             color: var(--gold-solid);
-            margin-bottom: 20px;
+            margin-bottom: 5px;
             letter-spacing: 2px;
+        }
+
+        .founder-title {
+            font-size: 12px;
+            letter-spacing: 3px;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            font-weight: 600;
         }
 
         .about-text p {
@@ -306,45 +428,62 @@
             background: var(--bg-pure-black);
         }
 
-        /* Services Section */
+        /* 2-COLUMN SERVICE LAYOUT WITH SCROLL MARGINS */
         .services {
             background-color: var(--bg-pure-black);
+            scroll-margin-top: 80px;
         }
 
-        .services-grid {
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
             gap: 30px;
+        }
+
+        .services-row {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 30px;
+            width: 100%;
         }
 
         .service-card {
             background: var(--bg-card);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 50px 30px;
-            text-align: center;
-            flex: 1;
-            min-width: 250px;
+            padding: 40px 30px;
+            text-align: left;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 25px;
             transition: 0.4s ease;
             position: relative;
+            flex: 1;
+            width: 50%;
+            scroll-margin-top: 120px; /* Smooth anchor alignment */
         }
 
         .service-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
             border-color: var(--gold-solid);
             box-shadow: 0 10px 30px rgba(212, 163, 66, 0.08);
         }
 
         .service-icon {
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             border: 1px solid var(--gold-solid);
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 0 auto 30px auto;
+            flex-shrink: 0;
             transform: rotate(45deg);
             background: var(--bg-pure-black);
             transition: 0.4s;
+            margin-top: 5px;
         }
 
         .service-card:hover .service-icon {
@@ -352,7 +491,7 @@
         }
 
         .service-icon i {
-            font-size: 24px;
+            font-size: 20px;
             color: var(--gold-solid);
             transform: rotate(-45deg);
             transition: 0.4s;
@@ -362,17 +501,21 @@
             color: var(--bg-pure-black);
         }
 
+        .service-content {
+            flex: 1;
+        }
+
         .service-card h4 {
             font-family: 'Cinzel', serif;
-            font-size: 20px;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
+            font-size: 18px;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
             color: #ffffff;
         }
 
         .service-card p {
             color: var(--text-gray);
-            font-size: 14px;
+            font-size: 13.5px;
             line-height: 1.6;
         }
 
@@ -380,6 +523,7 @@
         .portfolio {
             background-color: var(--bg-dark);
             border-top: 1px solid rgba(212, 163, 66, 0.1);
+            scroll-margin-top: 80px;
         }
 
         .portfolio-grid {
@@ -480,13 +624,11 @@
             display: block;
         }
 
-        .comparison-container .image-before {
-            z-index: 1;
-        }
+        .comparison-container .image-before { z-index: 1; }
 
         .comparison-container .image-after {
             z-index: 2;
-            width: 50%; /* Initial split width */
+            width: 50%;
             border-right: 3px solid var(--gold-solid);
         }
 
@@ -536,6 +678,7 @@
         .process {
             background-color: var(--bg-pure-black);
             border-top: 1px solid rgba(212, 163, 66, 0.1);
+            scroll-margin-top: 80px;
         }
 
         .process-timeline {
@@ -609,11 +752,57 @@
             background-color: var(--bg-pure-black);
             position: relative;
             border-top: 1px solid rgba(212, 163, 66, 0.1);
+            scroll-margin-top: 80px;
+        }
+
+        .contact-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .contact-info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .info-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-gold);
+            padding: 25px 15px;
+            transition: 0.3s;
+        }
+
+        .info-card:hover {
+            border-color: var(--gold-solid);
+            box-shadow: 0 5px 15px rgba(212, 163, 66, 0.1);
+        }
+
+        .info-card i {
+            font-size: 24px;
+            color: var(--gold-solid);
+            margin-bottom: 15px;
+        }
+
+        .info-card h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .info-card p {
+            font-size: 13px;
+            color: var(--text-gray);
+            word-break: break-word;
         }
 
         .contact-box {
-            max-width: 700px;
-            margin: 0 auto;
             background: var(--bg-card);
             border: 1px solid var(--border-gold);
             padding: 50px;
@@ -636,9 +825,7 @@
             margin-bottom: 40px;
         }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+        .form-group { margin-bottom: 20px; }
 
         .contact-box input, .contact-box textarea {
             width: 100%;
@@ -675,19 +862,41 @@
             letter-spacing: 3px;
         }
 
+        /* Trust Badges Bar */
+        .trust-badges-bar {
+            background: linear-gradient(to right, #111, #1c170e, #111);
+            border-top: 1px solid var(--border-gold);
+            border-bottom: 1px solid var(--border-gold);
+            padding: 25px 8%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .badge-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 500;
+            color: var(--gold-light);
+        }
+
+        .badge-item i { color: var(--gold-solid); font-size: 16px; }
+        .rating-stars i { color: var(--gold-solid); font-size: 12px; margin: 0 2px; }
+
         /* Footer */
         footer {
             background: #050505;
             padding: 40px 20px;
             text-align: center;
-            border-top: 1px solid rgba(212, 163, 66, 0.05);
         }
 
-        footer p {
-            font-size: 13px;
-            color: #666666;
-            letter-spacing: 1px;
-        }
+        footer p { font-size: 13px; color: #666666; letter-spacing: 1px; }
 
         footer .footer-logo {
             font-family: 'Cinzel', serif;
@@ -698,10 +907,15 @@
             font-weight: 700;
         }
 
-        /* Responsive Design Rules */
+        /* Responsive Breakpoints */
         @media (max-width: 992px) {
-            nav { display: none; } /* Simplicity for template view */
-            .services-grid, .portfolio-grid, .about, .process-timeline {
+            .services-row {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .service-card { width: 100%; }
+            .contact-info-grid { grid-template-columns: 1fr; }
+            .portfolio-grid, .about, .process-timeline, .trust-badges-bar {
                 flex-direction: column;
                 gap: 40px;
             }
@@ -710,25 +924,76 @@
             .hero h1 { font-size: 26px; }
             .comparison-container { height: 300px; }
         }
+
+        @media (max-width: 576px) {
+            .sidebar-nav { width: 100%; right: -100%; } /* Full screen mobile sidebar */
+            .service-card {
+                flex-direction: column !important;
+                text-align: center !important;
+                align-items: center !important;
+            }
+            .service-icon { margin: 0 auto; }
+        }
     </style>
 </head>
 <body>
 
+    <!-- Header containing Logo and Menu Trigger Button -->
     <header>
         <div class="logo-container">
             <span class="brand-name">IMPACT</span>
             <span class="brand-sub">INTERIORS</span>
         </div>
-        <nav>
-            <a href="#home" class="active">Home</a>
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#portfolio">Portfolio</a>
-            <a href="#process">Process</a>
-            <a href="#contact" class="btn-nav">Consultation</a>
-        </nav>
+        <!-- Modern Hamburger Menu Button -->
+        <button class="menu-toggle-btn" onclick="toggleSidebar()">
+            <span>Menu</span> <i class="fa-solid fa-bars"></i>
+        </button>
     </header>
 
+    <!-- Translucent Overlay Backdrop -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <!-- UPGRADED SLIDING SIDEBAR (Matching Layout from image 1000085286.png) -->
+    <div class="sidebar-nav" id="sidebarMenu">
+        <div class="sidebar-header">
+            <div class="logo-container" style="text-align: left;">
+                <span class="brand-name" style="font-size: 18px;">IMPACT</span>
+                <span class="brand-sub" style="font-size: 8px;">INTERIORS</span>
+            </div>
+            <button class="sidebar-close-btn" onclick="toggleSidebar()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        
+        <div class="menu-links">
+            <a href="#home" class="menu-item" onclick="toggleSidebar()">Home</a>
+            <a href="#about" class="menu-item" onclick="toggleSidebar()">About Us</a>
+            
+            <!-- Accordion Trigger for Services -->
+            <div class="menu-item" id="servicesTrigger" onclick="toggleAccordion()">
+                <span>Our Services</span>
+                <i class="fa-solid fa-chevron-down dropdown-chevron"></i>
+            </div>
+            
+            <!-- Quick Nested List View of All Services -->
+            <div class="services-accordion-content" id="servicesAccordion">
+                <a href="#kitchen" class="sub-service-link" onclick="toggleSidebar()">Modular Kitchen</a>
+                <a href="#pvc" class="sub-service-link" onclick="toggleSidebar()">PVC Wall Panels</a>
+                <a href="#ceiling" class="sub-service-link" onclick="toggleSidebar()">False Ceiling</a>
+                <a href="#wallpaper" class="sub-service-link" onclick="toggleSidebar()">Wallpaper Solutions</a>
+                <a href="#wardrobes" class="sub-service-link" onclick="toggleSidebar()">Wardrobes & TV Units</a>
+                <a href="#office" class="sub-service-link" onclick="toggleSidebar()">Home & Office</a>
+                <a href="#residential" class="sub-service-link" onclick="toggleSidebar()">Residential</a>
+                <a href="#commercial" class="sub-service-link" onclick="toggleSidebar()">Commercial</a>
+                <a href="#renovation" class="sub-service-link" onclick="toggleSidebar()">Renovation</a>
+                <a href="#turnkey" class="sub-service-link" onclick="toggleSidebar()">Turnkey Projects</a>
+            </div>
+
+            <a href="#portfolio" class="menu-item" onclick="toggleSidebar()">Gallery</a>
+            <a href="#process" class="menu-item" onclick="toggleSidebar()">Our Process</a>
+            <a href="#contact" class="menu-item" onclick="toggleSidebar()" style="color: var(--gold-solid); font-weight: 600;">Contact Us</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="emblem-box">
             <h2>IMPACT</h2>
@@ -747,50 +1012,123 @@
         </div>
     </section>
 
+    <!-- About Section -->
     <section id="about" class="about">
         <div class="about-text">
-            <h3>Crafting Premium Environments</h3>
+            <h3>PANKAJ VISHWAKARMA</h3>
+            <div class="founder-title">FOUNDER & MANAGING DIRECTOR</div>
             <div class="about-highlight">
-                "Hum aapke khwabon ko haqeeqat mein badalte hain, har kone ko ek royal touch dekar."
+                "Design That Creates Impact. Hum aapke khwabon ko haqeeqat mein badalte hain, har kone ko ek royal touch dekar."
             </div>
-            <p>Impact Interiors ek premier luxury interior design firm hai jo high-end residential aur commercial execution ke liye jaani jaati hai. Aapke logo ki tarah hi, humari design philosophy mein 'Gold Standard' Quality aur Modern Structure sabse upar aata hai.</p>
-            <p>Space optimization ho, elite customized furniture selection ho, ya fir customized false-ceiling lighting arrangement, humari expert team har ek detail par poori bariki se kaam kaiti hai.</p>
+            <p>Impact Interiors ek premier luxury interior design firm hai jo high-end residential aur commercial execution ke liye jaani jaati hai. Aapke logo ki tarah hi, humari design philosophy mein 'Gold Standard' Quality aur Modern Structure sabse upar aata.</p>
+            <p>Space optimization ho, elite customized furniture selection ho, ya fir customized false-ceiling lighting arrangement, humari expert team har ek detail par poori bariki se kaam karti hai.</p>
         </div>
         <div class="about-img">
             <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=600&q=80" alt="Luxury Living Room Design">
         </div>
     </section>
 
+    <!-- Services Section (Individual ID targets added for seamless sidebar anchoring) -->
     <section id="services" class="services">
         <div class="section-header">
-            <h2>Our Architectural Services</h2>
+            <h2>Complete Interior Solutions</h2>
             <div class="deco-line"><i class="fa-solid fa-gem"></i></div>
         </div>
         
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon"><i class="fa-solid fa-couch"></i></div>
-                <h4>Luxury Residential</h4>
-                <p>Premium villas, ultra-modern living rooms aur completely bespoke Modular Kitchens ka royal design execution.</p>
+        <div class="services-container">
+            <!-- Row 1 -->
+            <div class="services-row">
+                <div class="service-card" id="kitchen">
+                    <div class="service-icon"><i class="fa-solid fa-kitchen-set"></i></div>
+                    <div class="service-content">
+                        <h4>Modular Kitchen</h4>
+                        <p>Premium modern kitchen layouts customized with high-end premium finishes and maximum spacing optimization.</p>
+                    </div>
+                </div>
+                <div class="service-card" id="pvc">
+                    <div class="service-icon"><i class="fa-solid fa-border-all"></i></div>
+                    <div class="service-content">
+                        <h4>PVC Wall Panels</h4>
+                        <p>Elegant, durable and designer wall cladding panels giving a structural luxury layout to your drawing room.</p>
+                    </div>
+                </div>
             </div>
-            <div class="service-card">
-                <div class="service-icon"><i class="fa-solid fa-building"></i></div>
-                <h4>Corporate Elite</h4>
-                <p>High-end corporate offices, upscale cafes aur elite boutique showrooms ke liye functional premium layouts.</p>
+
+            <!-- Row 2 -->
+            <div class="services-row">
+                <div class="service-card" id="ceiling">
+                    <div class="service-icon"><i class="fa-solid fa-lightbulb"></i></div>
+                    <div class="service-content">
+                        <h4>False Ceiling</h4>
+                        <p>Ambient drop-lighting ceiling masterpieces curated strategically matching modern aesthetics patterns.</p>
+                    </div>
+                </div>
+                <div class="service-card" id="wallpaper">
+                    <div class="service-icon"><i class="fa-solid fa-scroll"></i></div>
+                    <div class="service-content">
+                        <h4>Wallpaper Solutions</h4>
+                        <p>Custom luxury texture graphics sheets curated perfectly to give your premium signature walls a rich texture profile.</p>
+                    </div>
+                </div>
             </div>
-            <div class="service-card">
-                <div class="service-icon"><i class="fa-solid fa-key"></i></div>
-                <h4>Turnkey Execution</h4>
-                <p>Design planning se lekar raw material purchase aur final finishing tak, sab kuch humari dekh-rekh mein complete handover.</p>
+
+            <!-- Row 3 -->
+            <div class="services-row">
+                <div class="service-card" id="wardrobes">
+                    <div class="service-icon"><i class="fa-solid fa-tv"></i></div>
+                    <div class="service-content">
+                        <h4>Wardrobes & TV Units</h4>
+                        <p>Sleek sliding premium wardrobes setups along with magnificent wooden-crafted media panel grids units.</p>
+                    </div>
+                </div>
+                <div class="service-card" id="office">
+                    <div class="service-icon"><i class="fa-solid fa-house-laptop"></i></div>
+                    <div class="service-content">
+                        <h4>Home & Office Interiors</h4>
+                        <p>End to end custom elite indoor spaces creation from scratch matching contemporary workspace environments styles.</p>
+                    </div>
+                </div>
             </div>
-            <div class="service-card">
-                <div class="service-icon"><i class="fa-solid fa-cubes"></i></div>
-                <h4>3D Space Visualization</h4>
-                <p>Kaam shuru hone se pehle hi aapne space ko ultra-realistic 3D walkthrough aur layouts ke jariye live dekhein.</p>
+
+            <!-- Row 4 -->
+            <div class="services-row">
+                <div class="service-card" id="residential">
+                    <div class="service-icon"><i class="fa-solid fa-house-chimney"></i></div>
+                    <div class="service-content">
+                        <h4>Residential Interiors</h4>
+                        <p>Complete custom premium luxury setup planning for high-end luxury villas, flats and dynamic living rooms.</p>
+                    </div>
+                </div>
+                <div class="service-card" id="commercial">
+                    <div class="service-icon"><i class="fa-solid fa-building"></i></div>
+                    <div class="service-content">
+                        <h4>Commercial Interiors</h4>
+                        <p>Bespoke interior planning for corporate high-end executive boardrooms, retail showrooms and dynamic elite cafes.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 5 -->
+            <div class="services-row">
+                <div class="service-card" id="renovation">
+                    <div class="service-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                    <div class="service-content">
+                        <h4>Renovation & Remodeling</h4>
+                        <p>Converting traditional structural spaces into breathtaking ultra-modern luxury infrastructure masterpieces.</p>
+                    </div>
+                </div>
+                <div class="service-card" id="turnkey">
+                    <div class="service-icon"><i class="fa-solid fa-key"></i></div>
+                    <div class="service-content">
+                        <h4>Turnkey Interior Projects</h4>
+                        <p>From initial abstract conceptual blueprinting maps to material management and final handover decoration tasks.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- Portfolio Section -->
     <section id="portfolio" class="portfolio">
         <div class="section-header">
             <h2>Bespoke Masterpieces</h2>
@@ -835,6 +1173,7 @@
         </div>
     </section>
 
+    <!-- Process Section -->
     <section id="process" class="process">
         <div class="section-header">
             <h2>Our Architectural Process</h2>
@@ -864,37 +1203,103 @@
         </div>
     </section>
 
+    <!-- Contact Section -->
     <section id="contact" class="contact">
-        <div class="contact-box">
-            <h3>Book Premium Consultation</h3>
-            <p>Apni space ko elite makeover dene ke liye niche diye gaye form ko bharein. Humari design team aapse jaldi hi sampark karegi.</p>
-            <form>
-                <div class="form-group">
-                    <input type="text" placeholder="Your Full Name" required>
+        <div class="contact-wrapper">
+            <div class="contact-info-grid">
+                <div class="info-card">
+                    <i class="fa-solid fa-phone"></i>
+                    <h4>Call Us</h4>
+                    <p>8979781212</p>
                 </div>
-                <div class="form-group">
-                    <input type="email" placeholder="Your Email Address" required>
+                <div class="info-card">
+                    <i class="fa-solid fa-envelope"></i>
+                    <h4>Email Us</h4>
+                    <p>IMPACTINTERIORSMEERUT@GMAIL.COM</p>
                 </div>
-                <div class="form-group">
-                    <input type="tel" placeholder="Your Phone Number" required>
+                <div class="info-card">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <h4>Location</h4>
+                    <p>Pallavpuram, Meerut (U.P.)</p>
                 </div>
-                <div class="form-group">
-                    <textarea rows="5" placeholder="Tell us about your space (e.g., 3BHK Home, Luxury Cafe, Office)" required></textarea>
-                </div>
-                <button type="submit" class="btn-submit">Submit Request</button>
-            </form>
+            </div>
+
+            <div class="contact-box">
+                <h3>Book Premium Consultation</h3>
+                <p>Apni space ko elite makeover dene ke liye niche diye gaye form ko bharein. Humari design team aapse jaldi hi sampark karegi.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Full Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email Address" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" placeholder="Your Phone Number" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea rows="5" placeholder="Tell us about your space (e.g., 3BHK Home, Luxury Cafe, Office)" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Submit Request</button>
+                </form>
+            </div>
         </div>
     </section>
 
+    <!-- Trust Badges -->
+    <div class="trust-badges-bar">
+        <div class="badge-item">
+            <i class="fa-solid fa-gem"></i>
+            <span>Premium Design</span>
+        </div>
+        <div class="badge-item">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Quality Assured</span>
+        </div>
+        <div class="badge-item">
+            <i class="fa-solid fa-handshake"></i>
+            <span>Customer Satisfaction</span>
+        </div>
+        <div class="badge-item">
+            <div class="rating-stars">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
     <footer>
         <div class="footer-logo">IMPACT INTERIORS</div>
         <p>Designed by Krishna Panchal | &copy; 2026 Impact Interiors. All Rights Reserved. Crafted with Luxury Standards.</p>
     </footer>
 
+    <!-- Interactive Navigation Scripts -->
     <script>
-        // Before/After Image Slider Control Logic
+        // Before-After Slider Control
         function moveSlider(value) {
             document.getElementById('afterImage').style.width = value + '%';
+        }
+
+        // Sidebar Sliding Open/Close Toggle
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebarMenu');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('show');
+        }
+
+        // Dropdown Accordion Toggle for Services Sublist (Image 1000085286.png Logic)
+        function toggleAccordion() {
+            const trigger = document.getElementById('servicesTrigger');
+            const content = document.getElementById('servicesAccordion');
+            
+            trigger.classList.toggle('active-drop');
+            content.classList.toggle('show');
         }
     </script>
 </body>
