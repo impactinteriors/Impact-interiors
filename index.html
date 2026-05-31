@@ -116,11 +116,11 @@
             color: var(--gold-solid);
         }
 
-        /* SLIDING SIDEBAR NAVIGATION (As per Image 1000085286.png) */
+        /* SLIDING SIDEBAR NAVIGATION */
         .sidebar-nav {
             position: fixed;
             top: 0;
-            right: -350px; /* Initially hidden on the right */
+            right: -350px;
             width: 350px;
             height: 100vh;
             background: #151518;
@@ -135,7 +135,7 @@
         }
 
         .sidebar-nav.open {
-            right: 0; /* Slide in */
+            right: 0;
         }
 
         .sidebar-header {
@@ -198,7 +198,7 @@
         }
 
         .services-accordion-content.show {
-            max-height: 500px; /* Expands to show nested list */
+            max-height: 500px;
         }
 
         .sub-service-link {
@@ -370,6 +370,17 @@
             -webkit-text-fill-color: transparent;
         }
 
+        .portfolio-sub-heading {
+            font-family: 'Cinzel', serif;
+            font-size: 22px;
+            color: var(--gold-solid);
+            letter-spacing: 2px;
+            margin: 40px 0 20px 0;
+            text-transform: uppercase;
+            border-left: 3px solid var(--gold-solid);
+            padding-left: 15px;
+        }
+
         /* About & Founder Section */
         .about {
             background-color: var(--bg-dark);
@@ -428,7 +439,7 @@
             background: var(--bg-pure-black);
         }
 
-        /* 2-COLUMN SERVICE LAYOUT WITH SCROLL MARGINS */
+        /* 2-COLUMN SERVICE LAYOUT */
         .services {
             background-color: var(--bg-pure-black);
             scroll-margin-top: 80px;
@@ -463,7 +474,7 @@
             position: relative;
             flex: 1;
             width: 50%;
-            scroll-margin-top: 120px; /* Smooth anchor alignment */
+            scroll-margin-top: 120px;
         }
 
         .service-card:hover {
@@ -526,18 +537,28 @@
             scroll-margin-top: 80px;
         }
 
-        .portfolio-grid {
-            display: flex;
+        /* Dynamic Grids for categories */
+        .portfolio-grid-3col {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 25px;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
+        }
+
+        .portfolio-grid-single {
+            display: grid;
+            grid-template-columns: 1fr;
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+            gap: 25px;
         }
 
         .portfolio-item {
             position: relative;
-            flex: 1;
             overflow: hidden;
-            height: 400px;
+            height: 380px;
             border: 1px solid rgba(212, 163, 66, 0.2);
+            background: #111;
         }
 
         .portfolio-item img {
@@ -566,14 +587,14 @@
 
         .portfolio-overlay h5 {
             font-family: 'Cinzel', serif;
-            font-size: 22px;
+            font-size: 20px;
             color: var(--gold-solid);
             margin-bottom: 10px;
             letter-spacing: 1px;
         }
 
         .portfolio-overlay p {
-            font-size: 14px;
+            font-size: 12px;
             color: var(--text-gray);
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -587,7 +608,7 @@
             opacity: 1;
         }
 
-        /* Before & After Slider Element */
+        /* Before & After Slider */
         .slider-title {
             font-family: 'Cinzel', serif;
             text-align: center;
@@ -915,7 +936,10 @@
             }
             .service-card { width: 100%; }
             .contact-info-grid { grid-template-columns: 1fr; }
-            .portfolio-grid, .about, .process-timeline, .trust-badges-bar {
+            .portfolio-grid-3col {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .portfolio-grid-others, .about, .process-timeline, .trust-badges-bar {
                 flex-direction: column;
                 gap: 40px;
             }
@@ -925,8 +949,14 @@
             .comparison-container { height: 300px; }
         }
 
+        @media (max-width: 768px) {
+            .portfolio-grid-3col {
+                grid-template-columns: 1fr;
+            }
+        }
+
         @media (max-width: 576px) {
-            .sidebar-nav { width: 100%; right: -100%; } /* Full screen mobile sidebar */
+            .sidebar-nav { width: 100%; right: -100%; }
             .service-card {
                 flex-direction: column !important;
                 text-align: center !important;
@@ -938,22 +968,19 @@
 </head>
 <body>
 
-    <!-- Header containing Logo and Menu Trigger Button -->
     <header>
         <div class="logo-container">
             <span class="brand-name">IMPACT</span>
             <span class="brand-sub">INTERIORS</span>
         </div>
-        <!-- Modern Hamburger Menu Button -->
         <button class="menu-toggle-btn" onclick="toggleSidebar()">
             <span>Menu</span> <i class="fa-solid fa-bars"></i>
         </button>
     </header>
 
-    <!-- Translucent Overlay Backdrop -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
-    <!-- UPGRADED SLIDING SIDEBAR (Matching Layout from image 1000085286.png) -->
+    <!-- SIDEBAR WITH QUICK ACCESS ACCORDION -->
     <div class="sidebar-nav" id="sidebarMenu">
         <div class="sidebar-header">
             <div class="logo-container" style="text-align: left;">
@@ -967,13 +994,11 @@
             <a href="#home" class="menu-item" onclick="toggleSidebar()">Home</a>
             <a href="#about" class="menu-item" onclick="toggleSidebar()">About Us</a>
             
-            <!-- Accordion Trigger for Services -->
             <div class="menu-item" id="servicesTrigger" onclick="toggleAccordion()">
                 <span>Our Services</span>
                 <i class="fa-solid fa-chevron-down dropdown-chevron"></i>
             </div>
             
-            <!-- Quick Nested List View of All Services -->
             <div class="services-accordion-content" id="servicesAccordion">
                 <a href="#kitchen" class="sub-service-link" onclick="toggleSidebar()">Modular Kitchen</a>
                 <a href="#pvc" class="sub-service-link" onclick="toggleSidebar()">PVC Wall Panels</a>
@@ -1028,7 +1053,7 @@
         </div>
     </section>
 
-    <!-- Services Section (Individual ID targets added for seamless sidebar anchoring) -->
+    <!-- Services Section -->
     <section id="services" class="services">
         <div class="section-header">
             <h2>Complete Interior Solutions</h2>
@@ -1036,7 +1061,6 @@
         </div>
         
         <div class="services-container">
-            <!-- Row 1 -->
             <div class="services-row">
                 <div class="service-card" id="kitchen">
                     <div class="service-icon"><i class="fa-solid fa-kitchen-set"></i></div>
@@ -1054,7 +1078,6 @@
                 </div>
             </div>
 
-            <!-- Row 2 -->
             <div class="services-row">
                 <div class="service-card" id="ceiling">
                     <div class="service-icon"><i class="fa-solid fa-lightbulb"></i></div>
@@ -1072,7 +1095,6 @@
                 </div>
             </div>
 
-            <!-- Row 3 -->
             <div class="services-row">
                 <div class="service-card" id="wardrobes">
                     <div class="service-icon"><i class="fa-solid fa-tv"></i></div>
@@ -1090,7 +1112,6 @@
                 </div>
             </div>
 
-            <!-- Row 4 -->
             <div class="services-row">
                 <div class="service-card" id="residential">
                     <div class="service-icon"><i class="fa-solid fa-house-chimney"></i></div>
@@ -1108,7 +1129,6 @@
                 </div>
             </div>
 
-            <!-- Row 5 -->
             <div class="services-row">
                 <div class="service-card" id="renovation">
                     <div class="service-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
@@ -1128,33 +1148,109 @@
         </div>
     </section>
 
-    <!-- Portfolio Section -->
+    <!-- Portfolio Section with Upgraded TV Unit & Kitchen Galleries -->
     <section id="portfolio" class="portfolio">
         <div class="section-header">
             <h2>Bespoke Masterpieces</h2>
             <div class="deco-line"><i class="fa-solid fa-star"></i></div>
         </div>
 
-        <div class="portfolio-grid">
+        <!-- TV Units Section (6 Photos) -->
+        <div class="portfolio-sub-heading">Premium TV Units Collection</div>
+        <div class="portfolio-grid-3col">
             <div class="portfolio-item">
-                <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=500&q=80" alt="Master Suite">
+                <img src="https://i.ibb.co/xqzH8PQT/IMG-20260531-WA0026.jpg" alt="Modern TV Unit Design 1">
                 <div class="portfolio-overlay">
-                    <h5>The Golden Lounge</h5>
-                    <p>Residential Masterpiece</p>
+                    <h5>Modern TV Unit - Style 1</h5>
+                    <p>Custom Luxury Woodwork</p>
                 </div>
             </div>
             <div class="portfolio-item">
-                <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=500&q=80" alt="Kitchen Concept">
+                <img src="https://i.ibb.co/mFYLgHZ9/IMG-20260531-WA0027.jpg" alt="Modern TV Unit Design 2">
                 <div class="portfolio-overlay">
-                    <h5>Bespoke Kitchen</h5>
-                    <p>Modern Space Planning</p>
+                    <h5>Modern TV Unit - Style 2</h5>
+                    <p>Premium Back-lit Panel</p>
                 </div>
             </div>
             <div class="portfolio-item">
-                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=500&q=80" alt="Office Lounge">
+                <img src="https://i.ibb.co/hqKsFwd/IMG-20260531-WA0025.jpg" alt="Modern TV Unit Design 3">
                 <div class="portfolio-overlay">
-                    <h5>Elite Boardroom</h5>
-                    <p>Commercial Execution</p>
+                    <h5>Modern TV Unit - Style 3</h5>
+                    <p>Elite Contemporary Setup</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://i.ibb.co/rKchZTQL/IMG-20260531-WA0023.jpg" alt="Modern TV Unit Design 4">
+                <div class="portfolio-overlay">
+                    <h5>Modern TV Unit - Style 4</h5>
+                    <p>Sleek Floating Console</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://i.ibb.co/4g5zy7tk/IMG-20260531-WA0020.jpg" alt="Modern TV Unit Design 5">
+                <div class="portfolio-overlay">
+                    <h5>Modern TV Unit - Style 5</h5>
+                    <p>Minimalist Royal Texture</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://i.ibb.co/1CZvXmd/IMG-20260531-WA0019.jpg" alt="Modern TV Unit Design 6">
+                <div class="portfolio-overlay">
+                    <h5>Modern TV Unit - Style 6</h5>
+                    <p>Grand Architecture Grid</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modular Kitchen Section (5 Photos) -->
+        <div class="portfolio-sub-heading">Luxury Modular Kitchens</div>
+        <div class="portfolio-grid-3col">
+            <div class="portfolio-item">
+                <img src="https://i.ibb.co/jPkmt91t/IMG-20260531-WA0011.jpg" alt="Luxury Kitchen Design 1">
+                <div class="portfolio-overlay">
+                    <h5>Modular Kitchen - Style 1</h5>
+                    <p>High-End Modern Layout</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://i.ibb.co/NgP2hWnc/IMG-20260531-WA0089.jpg" alt="Luxury Kitchen Design 2">
+                <div class="portfolio-overlay">
+                    <h5>Modular Kitchen - Style 2</h5>
+                    <p>Premium Countertops & Spacing</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://i.ibb.co/nqRpDJvY/IMG-20260531-WA0013.jpg" alt="Luxury Kitchen Design 3">
+                <div class="portfolio-overlay">
+                    <h5>Modular Kitchen - Style 3</h5>
+                    <p>Seamless Profile Cabinetry</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://i.ibb.co/fdVnQjFN/IMG-20260531-WA0092.jpg" alt="Luxury Kitchen Design 4">
+                <div class="portfolio-overlay">
+                    <h5>Modular Kitchen - Style 4</h5>
+                    <p>Contemporary Elegant Finish</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://i.ibb.co/fWLQkDH/IMG-20260531-WA0052.jpg" alt="Luxury Kitchen Design 5">
+                <div class="portfolio-overlay">
+                    <h5>Modular Kitchen - Style 5</h5>
+                    <p>Elite Ergonomic Structure</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ceilings & Other Solutions Section -->
+        <div class="portfolio-sub-heading">Ceilings & Wall Solutions</div>
+        <div class="portfolio-grid-single">
+            <div class="portfolio-item">
+                <!-- False Ceiling Photo Placeholder -->
+                <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=600&q=80" alt="False Ceiling Masterpiece">
+                <div class="portfolio-overlay">
+                    <h5>Ambient False Ceiling</h5>
+                    <p>Modern Drop-Lighting Setup</p>
                 </div>
             </div>
         </div>
@@ -1167,7 +1263,7 @@
             </div>
             <div id="afterImage" class="image-after">
                 <span class="slider-label label-after">After</span>
-                <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80" alt="Luxury Finished Space">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Luxury Finished Space">
             </div>
             <input type="range" min="0" max="100" value="50" class="comparison-slider-input" oninput="moveSlider(this.value)">
         </div>
@@ -1277,27 +1373,21 @@
         <p>Designed by Krishna Panchal | &copy; 2026 Impact Interiors. All Rights Reserved. Crafted with Luxury Standards.</p>
     </footer>
 
-    <!-- Interactive Navigation Scripts -->
     <script>
-        // Before-After Slider Control
         function moveSlider(value) {
             document.getElementById('afterImage').style.width = value + '%';
         }
 
-        // Sidebar Sliding Open/Close Toggle
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebarMenu');
             const overlay = document.getElementById('sidebarOverlay');
-            
             sidebar.classList.toggle('open');
             overlay.classList.toggle('show');
         }
 
-        // Dropdown Accordion Toggle for Services Sublist (Image 1000085286.png Logic)
         function toggleAccordion() {
             const trigger = document.getElementById('servicesTrigger');
             const content = document.getElementById('servicesAccordion');
-            
             trigger.classList.toggle('active-drop');
             content.classList.toggle('show');
         }
